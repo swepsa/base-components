@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CourseComponent, CoursesComponent, LoginComponent, RegistrationComponent } from './components/index';
+import { InfoComponent, ButtonComponent, HeaderComponent, SearchComponent } from './components/index';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-
-var components = [CourseComponent, CoursesComponent, LoginComponent, RegistrationComponent];
+var components = [InfoComponent, ButtonComponent, HeaderComponent, SearchComponent];
 
 @NgModule({
   declarations: components,
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule, NgbModule, FontAwesomeModule],
   exports: components
 })
 export class SharedModule {

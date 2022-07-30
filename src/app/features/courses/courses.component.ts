@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { mockedCourseList } from '..//..//../assets/mocks';
 
 @Component({
   selector: 'app-courses',
@@ -6,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements OnInit {
-
+  courses = mockedCourseList;
+  @Input() userName = '';
   constructor() { }
 
   ngOnInit(): void {
