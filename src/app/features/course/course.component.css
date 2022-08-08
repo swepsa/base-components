@@ -1,0 +1,8 @@
+.wrapper-hor{
+    display: flex;
+}
+
+.wrapper-ver{
+    display: flex;
+    flex-direction: column;
+}
