@@ -5,6 +5,10 @@
     </div>
 </app-header>
 
+<app-search></app-search>
+
+<br>
+
 <ng-template courseList [ngIf]="courses.length" [ngIfElse]="info">
     <app-course-list [courses]="courses"></app-course-list>
 </ng-template>

@@ -1,1 +1,37 @@
-<p>login works!</p>
+<app-header></app-header>
+<form #loginForm="ngForm" class="login">
+  <H4>Login</H4>
+  <div class="form-group">
+    <label>Email</label>
+    <input type="text" [(ngModel)]="login.email" name="mailInput" class="form-control" appEmail required
+      #mailInput="ngModel">
+    <div *ngIf="mailInput.invalid && (mailInput.dirty || mailInput.touched)" class="alert">
+      <div *ngIf="mailInput.errors?.['incorrectEmail']">
+        Incorrect e-mail.
+      </div>
+      <div *ngIf="mailInput.errors?.['required']">
+        This field is required
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" [(ngModel)]="login.password" name="passwordInput" class="form-control"
+      #passwordInput="ngModel" required>
+    <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="alert">
+      <div *ngIf="passwordInput.errors?.['required']">
+        This field is required
+      </div>
+    </div>
+  </div>
+  <p>
+    <button>Login</button>
+  </p>
+  <p>
+    <label>If you don't have an account you can</label>
+  </p>
+  <p>
+    <a href="url">Registration</a>
+  </p>
+</form>
