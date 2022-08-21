@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, catchError, map, of, take } from "rxjs";
+import { BehaviorSubject, catchError, map, Observable, of, take } from "rxjs";
 import { SessionStorageService } from "./session-storage.service";
 
 @Injectable({
@@ -13,9 +13,8 @@ export class AuthService {
 
   constructor(private sessionStorageService: SessionStorageService, private httpClient: HttpClient) { }
 
-  login(email: string, password: string) {
-
-    this.httpClient
+  login(email: string, password: string): Observable<string> {
+    return this.httpClient
       .post<{ result: string }>(`http://localhost:4000/login`, {
         email, password
       })
@@ -24,8 +23,8 @@ export class AuthService {
           console.log("LOGIN")
           this.sessionStorageService.setToken(data.result);
           this.isAuthorized$$.next(true);
-        }), take(1), catchError((err) => { console.log(err); return of(err) }))
-      .subscribe();
+          return data.result;
+        }), take(1), catchError((err) => { console.log(err); return of(err) }));
   }
 
   logout() {

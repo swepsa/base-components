@@ -10,14 +10,18 @@ import { RegistrationModule } from './features/registration/registration.module'
 import { CourseModule } from './features/course/course.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/interceptors/token.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { reducers, effects } from './store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   imports: [BrowserModule, FontAwesomeModule, NgbModule, AppRoutingModule, HttpClientModule,
-    CoursesModule, LoginModule, RegistrationModule, CourseModule],
+    CoursesModule, LoginModule, RegistrationModule, CourseModule,
+    StoreModule.forRoot(reducers), EffectsModule.forRoot(effects)],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   providers: [{
-    provide:HTTP_INTERCEPTORS, 
+    provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
   }]
