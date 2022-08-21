@@ -5,7 +5,7 @@
             <label>Title</label>
             <div class="wrapper-hor">
                 <input type="text" id="title" class="form-control" formControlName="title">
-                <button>Create course</button>
+                <button type="submit" class="btn btn-primary">Create course</button>
             </div>
             <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert">
                 <div *ngIf="title.errors?.['required']">
@@ -23,22 +23,6 @@
     </div>
     <div class="wrapper-hor">
         <div>
-
-            <!--div formArrayName="skills">
-                <div *ngFor="let skill of skills().controls; let i=index">
-                  <div [formGroupName]="i">
-                    {{i}}
-                    skill name :
-                    <input type="text" formControlName="skill">
-                    exp:
-                    <input type="text" formControlName="exp">
-             
-                    <button (click)="removeSkill(i)">Remove</button>
-                  </div>
-                </div>
-              </div-->
-
-
             <div>
                 <h4>Add authors</h4>
                 <label>Author name</label>

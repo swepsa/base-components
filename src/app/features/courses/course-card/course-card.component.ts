@@ -1,12 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CourseModel } from 'src/app/models/common.models';
 
-export interface Course {
-  title: string;
-  description: string;
-  creationDate: string;
-  duration: number;
-  authors: string[];
-}
 
 @Component({
   selector: 'app-course-card',
@@ -14,9 +8,8 @@ export interface Course {
   styleUrls: ['./course-card.component.css']
 })
 export class CourseCardComponent implements OnInit {
-  @Input() course!: Course;
+  @Input() course!: CourseModel;
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { };
 }

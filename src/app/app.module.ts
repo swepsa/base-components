@@ -8,12 +8,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './features/login/login.module';
 import { RegistrationModule } from './features/registration/registration.module';
 import { CourseModule } from './features/course/course.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './auth/interceptors/token.interceptor';
 
 @NgModule({
-  imports: [BrowserModule, FontAwesomeModule, NgbModule, AppRoutingModule, 
+  imports: [BrowserModule, FontAwesomeModule, NgbModule, AppRoutingModule, HttpClientModule,
     CoursesModule, LoginModule, RegistrationModule, CourseModule],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
+  providers: [{
+    provide:HTTP_INTERCEPTORS, 
+    useClass: TokenInterceptor,
+    multi: true
+  }]
 })
 
 export class AppModule { }
