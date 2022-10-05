@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, of, take } from 'rxjs';
-import { SessionStorageService } from '../auth/services/session-storage.service';
+import { catchError, map, Observable, of, take } from 'rxjs';
 import { CourseModel, SuccessfulRequest } from '../models/common.models';
 
 @Injectable({
@@ -13,7 +12,7 @@ export class CoursesService {
     private httpClient: HttpClient
   ) { }
 
-  getAll() {
+  getAll(): Observable<CourseModel[]> {
     return this.httpClient
       .get<SuccessfulRequest<CourseModel[]>>(`http://localhost:4000/courses/all`)
       .pipe(
@@ -22,23 +21,22 @@ export class CoursesService {
   }
 
   createCourse(courseModel: CourseModel) {
-    this.httpClient
-      .post(`http://localhost:4000/courses/add`,
+    return this.httpClient
+      .post<SuccessfulRequest<CourseModel>>(`http://localhost:4000/courses/add`,
         {
           "title": courseModel.title,
           "description": courseModel.description,
           "duration": courseModel.duration,
           "authors": courseModel.authors
         })
-      .pipe(take(1))
-      .subscribe(() => {
-        console.log("createCourse")
-      });
+      .pipe(
+        map(responce => { return responce.result }), take(1), catchError((err) => { console.log(err); return of(err) })
+      );
   }
 
   editCourse(courseModel: CourseModel) {
-    this.httpClient
-      .put(`http://localhost:4000/courses/` + courseModel.id,
+    return this.httpClient
+      .put<SuccessfulRequest<CourseModel>>(`http://localhost:4000/courses/` + courseModel.id,
         {
           "title": courseModel.title,
           "description": courseModel.description,
@@ -46,10 +44,9 @@ export class CoursesService {
           "duration": courseModel.duration,
           "authors": courseModel.authors
         })
-      .pipe(take(1))
-      .subscribe(() => {
-        console.log("edit Course")
-      });
+      .pipe(
+        map(responce => { return responce.result }), take(1), catchError((err) => { console.log(err); return of(err) })
+      );
   }
 
   getCourse(id: string) {

@@ -27,8 +27,7 @@ export class AuthorsService {
       .pipe(
         map((data) => {
           console.log("Add author")
-        }), take(1), catchError((err) => { console.log(err); return of(err) }))
-      .subscribe();
+        }), take(1), catchError((err) => { console.log(err); return of(err) }));
   }
 }
 
